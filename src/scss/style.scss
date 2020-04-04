@@ -1,0 +1,17 @@
+@import './shared/vars';
+
+body p {
+  color: $base-font-color;
+}
+
+.important {
+  color: $important-font-color;
+}
+
+p {
+  height: 1em;
+}
+
+img {
+  height: 100%;
+}

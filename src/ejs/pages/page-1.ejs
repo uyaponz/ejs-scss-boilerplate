@@ -1,0 +1,20 @@
+<%
+  const pageTitle = 'Page 1';
+%>
+
+<%- include('../shared/sys/_html-top', { title: pageTitle }) %>
+
+
+<body>
+  <header><%- include('../shared/parts/_header') %></header>
+
+  <div>
+    <p>First page.</p>
+    <a href="/">&lt; back to top page</a>
+  </div>
+
+  <footer><%- include('../shared/parts/_footer') %></footer>
+</body>
+
+
+<%- include('../shared/sys/_html-bottom') %>

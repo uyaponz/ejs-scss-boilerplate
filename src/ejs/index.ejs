@@ -1,0 +1,14 @@
+<%
+  const version = '0.1.0';
+  const pageTitle = 'Top page';
+%>
+
+<%- include('./shared/sys/_html-top', { title: pageTitle }) %>
+
+<body>
+  <header><%- include('./shared/parts/_header') %></header>
+  <div><%- include('./_main-content', { version }) %></div>
+  <footer><%- include('./shared/parts/_footer') %></footer>
+</body>
+
+<%- include('./shared/sys/_html-bottom') %>
