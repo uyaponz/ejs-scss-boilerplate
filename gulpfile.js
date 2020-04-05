@@ -27,14 +27,14 @@ const browserSync = require('browser-sync');
   const assetsRoot = 'assets';
   const assetsOutRoot = '';
 
-  const allEjsFiles = path.join(pathToSrc, ejsRoot, '**/*.ejs');
-  const targetEjsFiles = path.join(pathToSrc, ejsRoot, '**/[^_.]*.ejs');
-  const allScssFiles = path.join(pathToSrc, scssRoot, '**/*.scss');
+  const allEjsFiles = path.posix.join(pathToSrc, ejsRoot, '**/*.ejs');
+  const targetEjsFiles = path.posix.join(pathToSrc, ejsRoot, '**/[^_.]*.ejs');
+  const allScssFiles = path.posix.join(pathToSrc, scssRoot, '**/*.scss');
   const targetScssFiles = allScssFiles;
-  const allJsFiles = path.join(pathToSrc, jsRoot, '**/*.js');
-  const targetJsFiles = path.join(pathToSrc, jsRoot, '**/[^_.]*.js');
-  const targetAssetsFiles = path.join(pathToSrc, assetsRoot, '**/[^.]*');
-  const allAssetsFiles = path.join(pathToSrc, assetsRoot, '**/*');
+  const allJsFiles = path.posix.join(pathToSrc, jsRoot, '**/*.js');
+  const targetJsFiles = path.posix.join(pathToSrc, jsRoot, '**/[^_.]*.js');
+  const targetAssetsFiles = path.posix.join(pathToSrc, assetsRoot, '**/[^.]*');
+  const allAssetsFiles = path.posix.join(pathToSrc, assetsRoot, '**/*');
 
   gulp.task('build-ejs', () =>
     gulp
@@ -42,7 +42,7 @@ const browserSync = require('browser-sync');
       .pipe(gulpPlumber())
       .pipe(gulpEjs().on('error', fancyLog))
       .pipe(gulpRename({ extname: '.html' }))
-      .pipe(gulp.dest(path.join(pathToDest, htmlOutRoot)))
+      .pipe(gulp.dest(path.posix.join(pathToDest, htmlOutRoot)))
   );
   gulp.task('watch-ejs', () => {
     gulp.watch(allEjsFiles, gulp.series('build-ejs', 'reload-browser-sync'));
@@ -52,13 +52,13 @@ const browserSync = require('browser-sync');
     gulp
       .src(targetScssFiles)
       .pipe(gulpSass.sync().on('error', gulpSass.logError))
-      .pipe(gulp.dest(path.join(pathToDest, cssOutRoot)))
+      .pipe(gulp.dest(path.posix.join(pathToDest, cssOutRoot)))
   );
   gulp.task('minify-css', () =>
     gulp
-      .src(path.join(pathToDest, cssOutRoot, '**/*.css'))
+      .src(path.posix.join(pathToDest, cssOutRoot, '**/*.css'))
       .pipe(gulpCleanCss())
-      .pipe(gulp.dest(path.join(pathToDest, cssOutRoot)))
+      .pipe(gulp.dest(path.posix.join(pathToDest, cssOutRoot)))
   );
   gulp.task('watch-scss', () => {
     gulp.watch(allScssFiles, gulp.series('build-scss', 'reload-browser-sync'));
@@ -68,13 +68,13 @@ const browserSync = require('browser-sync');
     gulp
       .src(targetJsFiles)
       .pipe(gulpPlumber())
-      .pipe(gulp.dest(path.join(pathToDest, jsOutRoot)))
+      .pipe(gulp.dest(path.posix.join(pathToDest, jsOutRoot)))
   );
   gulp.task('uglify-js', () =>
     gulp
-      .src(path.join(pathToDest, jsOutRoot, '**/*.js'))
+      .src(path.posix.join(pathToDest, jsOutRoot, '**/*.js'))
       .pipe(gulpUglify())
-      .pipe(gulp.dest(path.join(pathToDest, jsOutRoot)))
+      .pipe(gulp.dest(path.posix.join(pathToDest, jsOutRoot)))
   );
   gulp.task('watch-js', () => {
     gulp.watch(allJsFiles, gulp.series('build-js', 'reload-browser-sync'));
@@ -83,7 +83,7 @@ const browserSync = require('browser-sync');
   gulp.task('copy-assets', () =>
     gulp
       .src(targetAssetsFiles)
-      .pipe(gulp.dest(path.join(pathToDest, assetsOutRoot)))
+      .pipe(gulp.dest(path.posix.join(pathToDest, assetsOutRoot)))
   );
   gulp.task('watch-assets', () => {
     gulp.watch(allAssetsFiles, gulp.series('copy-assets', 'reload-browser-sync'));
